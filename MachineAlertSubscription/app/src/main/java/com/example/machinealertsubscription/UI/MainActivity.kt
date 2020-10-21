@@ -1,15 +1,12 @@
 package com.example.machinealertsubscription.UI
 
-
 import android.content.Intent
-import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.view.View
 import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Bundle
-import android.support.wearable.activity.WearableActivity
-import com.example.machinealertsubscription.R
+
 
 
 class MainActivity : WearableActivity() {
@@ -24,15 +21,15 @@ class MainActivity : WearableActivity() {
 
   }
 
-  private fun setOnclickListeners(){
-    btn_alerts.setOnClickListener{ view ->
+  private fun setOnclickListeners() {
+    btn_alerts.setOnClickListener { view ->
       var intent = Intent(this, AlertList::class.java).apply {
         putExtra("typeOfAlert", "Alerts")
       }
       startActivity(intent)
     }
 
-    btn_machines.setOnClickListener {view ->
+    btn_machines.setOnClickListener { view ->
       var intent = Intent(this, AlertList::class.java).apply {
         putExtra("typeOfAlert", "Machines")
       }
@@ -40,5 +37,9 @@ class MainActivity : WearableActivity() {
     }
   }
 
+
+  public fun alertOnClick(view: View) {
+
+  }
 
 }

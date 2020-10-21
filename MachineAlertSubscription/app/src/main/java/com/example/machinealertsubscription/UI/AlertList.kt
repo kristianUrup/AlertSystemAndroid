@@ -13,12 +13,13 @@ class AlertList : WearableActivity() {
 
     private var fakeDb: FakeDB = FakeDB()
     private var identifier: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_list)
 
         // Enables Always-on
-        setAmbientEnabled()
+
 
         var bundle: Bundle ?= intent.extras
         val toIdentify = bundle!!.getString("typeOfAlert")
