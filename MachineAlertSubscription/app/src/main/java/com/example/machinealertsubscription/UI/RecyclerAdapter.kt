@@ -13,7 +13,7 @@ import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.list_item.view.*
 import kotlin.reflect.typeOf
 
-class RecyclerAdapter<T>(private val identifier: String, private val listOfItems: List<T>): RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
+class RecyclerAdapter<T>(private val listOfItems: List<T>): RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
     public class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_id: TextView = itemView.txt_id
@@ -34,12 +34,12 @@ class RecyclerAdapter<T>(private val identifier: String, private val listOfItems
         val currentItem = listOfItems[position]
 
         if(currentItem is Machine){
-            holder.txt_description.setText(currentItem.ID)
+            holder.txt_description.text = currentItem.ID.toString()
         }
         else if(currentItem is Alert){
-            holder.txt_id.setText(currentItem.ID)
-            holder.txt_description.setText(currentItem.errorDescription)
-            holder.txt_machineId.setText(currentItem.machine.ID)
+            holder.txt_id.text = currentItem.ID.toString()
+            holder.txt_description.text = currentItem.errorDescription
+            holder.txt_machineId.text = currentItem.machine.ID.toString()
         }
         else {
             //Do nothing

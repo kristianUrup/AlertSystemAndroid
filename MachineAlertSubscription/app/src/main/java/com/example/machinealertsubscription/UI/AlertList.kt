@@ -2,8 +2,10 @@ package com.example.machinealertsubscription.UI
 
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
+import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.wear.widget.WearableLinearLayoutManager
+import androidx.wear.widget.WearableRecyclerView
 import com.example.machinealertsubscription.BE.Machine
 import com.example.machinealertsubscription.DataAccess.FakeDB
 import com.example.machinealertsubscription.R
@@ -21,14 +23,33 @@ class AlertList : WearableActivity() {
         // Enables Always-on
 
 
-        var bundle: Bundle ?= intent.extras
+        var bundle: Bundle? = intent.extras
         val toIdentify = bundle!!.getString("typeOfAlert")
         identifier = intent.getStringExtra("typeOfAlert")
-        Toast.makeText(this,identifier,Toast.LENGTH_SHORT).show()
 
-        val recyclerView = view_recyclerView.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(this)
-        val adapter = RecyclerAdapter<Machine>(fakeDb.getMachines());
+        setRecyclerView()
+    }
+
+    private fun setRecyclerView(){
+        val recyclerView: WearableRecyclerView = view_recyclerView
+        var listOfItems: List<Any>
+        if(identifier == "Machines"){
+            listOfItems = fakeDb.getMachines()
+        }
+        else{
+            listOfItems = fakeDb.getAlerts()
+        }
+
+        recyclerView.apply {
+            adapter = RecyclerAdapter(listOfItems)
+            isEdgeItemsCenteringEnabled = true
+            isCircularScrollingGestureEnabled = true
+            bezelFraction = 0.5f
+            scrollDegreesPerScreen = 90f
+            layoutManager = WearableLinearLayoutManager(this@AlertList)
+
+        }
+        //recyclerView.setHasFixedSize(true)
     }
 
 }

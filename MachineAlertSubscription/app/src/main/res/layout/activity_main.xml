@@ -32,7 +32,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:onClick="alertOnClick"
         android:text="@string/button_alerts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +44,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
+        android:text="@string/button_machines"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_alerts" />

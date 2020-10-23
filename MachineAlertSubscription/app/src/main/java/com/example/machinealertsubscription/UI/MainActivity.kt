@@ -37,9 +37,4 @@ class MainActivity : WearableActivity() {
     }
   }
 
-
-  public fun alertOnClick(view: View) {
-
-  }
-
 }
