@@ -6,10 +6,18 @@ import android.view.View
 import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Bundle
-
+import com.example.machinealertsubscription.BE.Alert
+import com.example.machinealertsubscription.DataAccess.AlertDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.coroutineContext
 
 
 class MainActivity : WearableActivity() {
+
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

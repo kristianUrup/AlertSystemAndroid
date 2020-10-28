@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Alert(@PrimaryKey val ID: Int, val errorDescription: String, val machine: Machine)
+data class Alert(@PrimaryKey val ID: Int,val code: String, val errorDescription: String)
 
 
 @Entity

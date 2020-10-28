@@ -39,11 +39,13 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>): RecyclerView.Adapter
         else if(currentItem is Alert){
             holder.txt_id.text = currentItem.ID.toString()
             holder.txt_description.text = currentItem.errorDescription
-            holder.txt_machineId.text = currentItem.machine.ID.toString()
+            holder.txt_machineId.text = currentItem.code
         }
         else {
             //Do nothing
         }
 
     }
+
+
 }
