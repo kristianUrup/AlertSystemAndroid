@@ -58,7 +58,6 @@ class AlertDAO  {
         return coroutine1
 
          */
-
         var fakeDb = FakeDB()
         return fakeDb.getAlerts()
     }
