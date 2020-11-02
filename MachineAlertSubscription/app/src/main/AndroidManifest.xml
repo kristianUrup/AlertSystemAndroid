@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.machinealertsubscription">
-    package="com.example.machinealertsubscription">
 
     <uses-feature android:name="android.hardware.type.watch" />
 
@@ -27,18 +26,6 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
-
-    <service
-        android:name=".RegistrationIntentService"
-        android:exported="false">
-    </service>
-    <service
-        android:name=".FirebaseService"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
 
 
         <!--
