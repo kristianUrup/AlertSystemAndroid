@@ -46,7 +46,7 @@ class AlertList : WearableActivity() {
 
 
         var bundle: Bundle? = intent.extras
-        val toIdentify = bundle!!.getString("typeOfAlert")
+        val toIdentify = bundle!!.getString("typeOfAlert") as String
         identifier = intent.getStringExtra("typeOfAlert")
 
 
@@ -79,8 +79,6 @@ class AlertList : WearableActivity() {
 
             }
         }
-
-        println("Done!")
 
         recyclerView.apply {
             adapter = this@AlertList.adapter

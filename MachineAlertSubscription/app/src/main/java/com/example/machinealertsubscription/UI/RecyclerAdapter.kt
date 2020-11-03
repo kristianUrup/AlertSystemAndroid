@@ -15,7 +15,7 @@ import kotlin.reflect.typeOf
 
 class RecyclerAdapter<T>(private val listOfItems: List<T>): RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
-    public class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_id: TextView = itemView.txt_id
         val txt_description: TextView = itemView.txt_description
         val txt_machineId: TextView = itemView.txt_machineId
@@ -24,7 +24,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>): RecyclerView.Adapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
 
-        return RecycleViewHolder(itemView);
+        return RecycleViewHolder(itemView)
     }
 
     override fun getItemCount() = listOfItems.size

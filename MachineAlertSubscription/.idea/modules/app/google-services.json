@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "420851981299",
+    "firebase_url": "https://alarmsystem-d674e.firebaseio.com",
+    "project_id": "alarmsystem-d674e",
+    "storage_bucket": "alarmsystem-d674e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420851981299:android:85fe34780930b667fc5086",
+        "android_client_info": {
+          "package_name": "com.example.machinealertsubscription"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420851981299-qt8sben27lbcq58762o3184tfip92rdd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.machinealertsubscription",
+            "certificate_hash": "3d5614a8eceb9ea700986f90308f0017671b2810"
+          }
+        },
+        {
+          "client_id": "420851981299-2mjhegtgq97nt6g96n2uhv6f6pv5qiuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZFV50kgmxQ5fY_-KTztVg2nXr0NiXki4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420851981299-2mjhegtgq97nt6g96n2uhv6f6pv5qiuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
