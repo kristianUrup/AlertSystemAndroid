@@ -8,7 +8,11 @@ import com.example.machinealertsubscription.BE.NotificationSettings
 import com.example.machinealertsubscription.UI.MainActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import com.microsoft.windowsazure.messaging.NotificationHub
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+
 
 class RegistrationIntentService: IntentService("RegIntentService") {
     private val TAG = "RegIntentService"
@@ -18,6 +22,7 @@ class RegistrationIntentService: IntentService("RegIntentService") {
     override fun onHandleIntent(intent: Intent?) {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                 var fcmToken: String? = null
                 var resultString = ""
                 if (task.isSuccessful) {
@@ -27,17 +32,28 @@ class RegistrationIntentService: IntentService("RegIntentService") {
                     resultString = "Did not get token"
                 }
                 if (fcmToken != null) {
+                val tokenFromPreferences = sharedPreferences.getString("FCMToken","")
+                if(tokenFromPreferences != fcmToken){
                     try {
                         val hub = NotificationHub(
                             "mobile-app-notification",
                             "Endpoint=sb://alarm-system-notification.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=RLHwGy5sFgmpEt1uF3HzhsCc6YQbinr8UK5MKwxh4f4=",
-                            this@RegistrationIntentService
+                            applicationContext
                         )
-                        hub.register(fcmToken)
+                        CoroutineScope(IO).launch {
+                            hub.register(fcmToken)
+                            sharedPreferences.edit().putString("FCMToken", fcmToken).apply()
+                        }
                     } catch (e: java.lang.Exception) {
-                        Log.d(TAG, e.message)
+                        e.printStackTrace()
+                        resultString = "error occurred"
                     }
+                } else {
+                    resultString = "Already registered haha"
                 }
+
+            }
+                Log.d(TAG, resultString)
                 if (MainActivity().isAcitivityVisible) {
                     MainActivity().mainActivity.ToastNotify(resultString)
                 }

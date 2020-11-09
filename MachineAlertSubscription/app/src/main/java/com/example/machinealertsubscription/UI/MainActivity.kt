@@ -12,6 +12,8 @@ import com.example.machinealertsubscription.Service.RegistrationIntentService
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 
 
 class MainActivity : WearableActivity() {
@@ -34,7 +36,7 @@ class MainActivity : WearableActivity() {
     setOnclickListeners()
 
     registerWithNotificationHubs()
-    FirebaseService().createChannelAndHandleNotifications(getApplicationContext())
+    FirebaseService().createChannelAndHandleNotifications(applicationContext)
   }
 
   private fun setOnclickListeners() {
@@ -69,11 +71,13 @@ class MainActivity : WearableActivity() {
     }
     return true
   }
+
   fun registerWithNotificationHubs() {
     if (checkPlayServices()) {
       // Start IntentService to register this application with FCM.
       val intent = Intent(this, RegistrationIntentService::class.java)
       startService(intent)
+
     }
   }
 

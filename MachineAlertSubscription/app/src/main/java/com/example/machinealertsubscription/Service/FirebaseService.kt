@@ -49,13 +49,14 @@ class FirebaseService: FirebaseMessagingService() {
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        if (MainActivity().isAcitivityVisible) {
-            MainActivity().mainActivity.ToastNotify(nhMessage)
-        }
+        //if (MainActivity().isAcitivityVisible) {
+         //   MainActivity().mainActivity.ToastNotify(nhMessage)
+        //}
         sendNotification(nhMessage)
     }
 
     private fun sendNotification(msg: String?) {
+        ctx = this
         val intent = Intent(ctx, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         mNotificationManager =
@@ -81,7 +82,6 @@ class FirebaseService: FirebaseMessagingService() {
 
     fun createChannelAndHandleNotifications(context: Context) {
         ctx = context
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID,
