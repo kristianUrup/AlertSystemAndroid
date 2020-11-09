@@ -40,8 +40,8 @@ class RegistrationIntentService: IntentService("RegIntentService") {
                     .also { regID = it } == null
             ) {
                 val hub = NotificationHub(
-                    "mobile-app-notification",
-                    "Endpoint=sb://alarm-system-notification.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=RLHwGy5sFgmpEt1uF3HzhsCc6YQbinr8UK5MKwxh4f4=", this
+                    NotificationSettings().HubName,
+                    NotificationSettings().HubListenConnectionString, this
                 )
                 Log.d(
                     TAG,
@@ -60,8 +60,8 @@ class RegistrationIntentService: IntentService("RegIntentService") {
                     .also { storedToken = it } != FCM_token
             ) {
                 val hub = NotificationHub(
-                    "mobile-app-notification",
-                    "Endpoint=sb://alarm-system-notification.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=RLHwGy5sFgmpEt1uF3HzhsCc6YQbinr8UK5MKwxh4f4=", this
+                    NotificationSettings().HubName,
+                    NotificationSettings().HubListenConnectionString, this
                 )
                 Log.d(TAG, "NH Registration refreshing with token : $FCM_token")
                 regID = hub.register(FCM_token).registrationId
