@@ -8,31 +8,51 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.machinealertsubscription.UI.MainActivity
-import com.microsoft.windowsazure.notifications.NotificationsHandler
-import com.microsoft.windowsazure.notifications.NotificationsManager
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
 
-class FirebaseService: NotificationsHandler() {
+class FirebaseService: FirebaseMessagingService() {
     private val TAG = "FirebaseService"
     val NOTIFICATION_CHANNEL_ID = "nh-demo-channel-id"
     val NOTIFICATION_CHANNEL_NAME = "Notification Hubs Demo Channel"
     val NOTIFICATION_CHANNEL_DESCRIPTION = "Notification Hubs Demo Channel"
-
     val NOTIFICATION_ID = 1
+
     private var mNotificationManager: NotificationManager? = null
     var builder: NotificationCompat.Builder? = null
     var ctx: Context? = null
 
-    override fun onReceive(context: Context?, bundle: Bundle) {
-        ctx = context
-        val nhMessage = bundle.getString("message")
-        sendNotification(nhMessage)
+    override fun onNewToken(p0: String) {
+        super.onNewToken(p0)
+        val intent = Intent(this, RegistrationIntentService::class.java)
+        startService(intent)
+    }
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+
+        Log.d(TAG, "From: " + remoteMessage.getFrom())
+
+        val nhMessage: String? = if (remoteMessage.notification != null) {
+            Log.d(
+                TAG,
+                "Message Notification Body: " + remoteMessage.notification!!.body
+            )
+            remoteMessage.notification!!.body
+        } else {
+            remoteMessage.data.values.iterator().next()
+        }
+
+
+        // Also if you intend on generating your own notifications as a result of a received FCM
+        // message, here is where that should be initiated. See sendNotification method below.
         if (MainActivity().isAcitivityVisible) {
             MainActivity().mainActivity.ToastNotify(nhMessage)
         }
+        sendNotification(nhMessage)
     }
 
     private fun sendNotification(msg: String?) {
@@ -60,16 +80,21 @@ class FirebaseService: NotificationsHandler() {
     }
 
     fun createChannelAndHandleNotifications(context: Context) {
-        val channel = NotificationChannel(
-            NOTIFICATION_CHANNEL_ID,
-            NOTIFICATION_CHANNEL_NAME,
-            NotificationManager.IMPORTANCE_HIGH
-        )
-        channel.description = NOTIFICATION_CHANNEL_DESCRIPTION
-        channel.setShowBadge(true)
-        val notificationManager =
-            context.getSystemService(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
-        NotificationsManager.handleNotifications<FirebaseService>(context, "", FirebaseService::class.java)
+        ctx = context
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                NOTIFICATION_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = NOTIFICATION_CHANNEL_DESCRIPTION
+            channel.setShowBadge(true)
+            val notificationManager =
+                context.getSystemService(
+                    NotificationManager::class.java
+                )
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }
