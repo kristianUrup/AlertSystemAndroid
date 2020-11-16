@@ -23,7 +23,6 @@ class FirebaseService: FirebaseMessagingService() {
     val NOTIFICATION_ID = 1
 
     private var mNotificationManager: NotificationManager? = null
-    var builder: NotificationCompat.Builder? = null
     var ctx: Context? = null
 
     override fun onNewToken(p0: String) {
