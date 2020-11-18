@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import com.example.machinealertsubscription.R
 import com.example.machinealertsubscription.Service.FirebaseService
@@ -12,8 +11,6 @@ import com.example.machinealertsubscription.Service.RegistrationIntentService
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 
 
 class MainActivity : WearableActivity() {
@@ -41,14 +38,14 @@ class MainActivity : WearableActivity() {
 
   private fun setOnclickListeners() {
     btn_alerts.setOnClickListener { view ->
-      var intent = Intent(this, AlertList::class.java).apply {
-        putExtra("typeOfAlert", "Alerts")
+      var intent = Intent(this, AlarmList::class.java).apply {
+        putExtra("typeOfAlert", "Alarms")
       }
       startActivity(intent)
     }
 
     btn_machines.setOnClickListener { view ->
-      var intent = Intent(this, AlertList::class.java).apply {
+      var intent = Intent(this, AlarmList::class.java).apply {
         putExtra("typeOfAlert", "Machines")
       }
       startActivity(intent)
