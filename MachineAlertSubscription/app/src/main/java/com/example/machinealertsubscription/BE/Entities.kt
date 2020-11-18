@@ -16,3 +16,9 @@ data class Alarm(
 
 @Entity
 data class Machine(@PrimaryKey val machineId: String)
+
+@Entity
+data class MachineWatch(@PrimaryKey val WatchId: String, val Machine: Machine)
+
+@Entity
+data class AlarmWatch(@PrimaryKey val WathcId: String, val Alarm: Alarm)
