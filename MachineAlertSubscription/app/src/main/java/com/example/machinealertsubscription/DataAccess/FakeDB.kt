@@ -21,15 +21,15 @@ class FakeDB{
     private val codeList: List<Int> = arrayListOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
     private val errorDescs: ArrayList<String> = arrayListOf(" needs an oil change", " needs an complete service", " the container is full", " coffee break", " Frederik skal have hjælp igen")
     constructor(){
-        this.InitMachinesAndAlerts();
+        this.InitMachinesAndAlerts()
     }
 
-    public fun InitMachinesAndAlerts(){
+    fun InitMachinesAndAlerts(){
         //initMachines
 
     }
 
-    public fun getMachines(): Flow<Machine> {
+    fun getMachines(): Flow<Machine> {
         return flow<Machine> {
             for(i in machineId until 100){
                 val machine = Machine(i)
@@ -43,7 +43,7 @@ class FakeDB{
     }
 
 
-    public suspend fun getAlerts(): Flow<Alert>{
+    suspend fun getAlerts(): Flow<Alert>{
         return flow<Alert> {
             for(i in alertId until 100){
 

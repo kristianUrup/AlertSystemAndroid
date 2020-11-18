@@ -23,10 +23,9 @@ import java.nio.channels.FileChannel.open
 
 class AlertDAO  {
 
-    constructor(){
-    }
+    constructor()
 
-    public suspend fun getAlerts(): Flow<Alert> {
+    suspend fun getAlerts(): Flow<Alert> {
 
 
 /*        val am = _context!!.assets
