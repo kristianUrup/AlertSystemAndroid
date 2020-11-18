@@ -7,6 +7,9 @@ import kotlinx.android.synthetic.main.activity_confirm.*
 
 class ConfirmActivity : WearableActivity() {
 
+    private val SUBSCRIBED_EXPLANATION: String = "Are you sure want to unsubscribe this "
+    private val DEFAULT_EXPLANATION: String = "Are you sure you want to subscribe to this "
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm)
@@ -18,14 +21,28 @@ class ConfirmActivity : WearableActivity() {
 
         val descriptionFromBundle: String = intent.getStringExtra("description")
         val codeFromBundle: String = intent.getStringExtra("code")
-        if(codeFromBundle != null && descriptionFromBundle != null){
-            id.text = intent.getStringExtra("id")
-            description.text = descriptionFromBundle
-            code.text = codeFromBundle
+        if(codeFromBundle != "" && descriptionFromBundle != ""){
+            id.text = "ID: " + intent.getStringExtra("id")
+            description.text = "Description: " + descriptionFromBundle
+            code.text = "Code: " + codeFromBundle
+            txt_subscription_explanation.text = DEFAULT_EXPLANATION + "alarm"
         }
         else{
-            id.text = intent.getStringExtra("id")
+            id.text = "ID: " + intent.getStringExtra("id")
+            txt_subscription_explanation.text = DEFAULT_EXPLANATION + "machine"
+            code.text = ""
+            description.text = ""
         }
 
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        btn_yes.setOnClickListener {
+            // Do something when they want to subscribe to alarm
+        }
+        btn_no.setOnClickListener {
+            super.finish()
+        }
     }
 }

@@ -16,11 +16,11 @@
 
         <TextView
             android:id="@+id/txt_subscription_explanation"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="35dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +32,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/code" />
@@ -43,6 +44,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/id" />
@@ -54,30 +56,31 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_subscription_explanation" />
 
         <Button
-            android:id="@+id/btn_ok"
+            android:id="@+id/btn_yes"
             android:layout_width="52dp"
             android:layout_height="35dp"
             android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="@string/yes_button"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/btn_no"
             android:layout_width="52dp"
             android:layout_height="35dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:text="@string/no_button"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/btn_ok"
+            app:layout_constraintStart_toEndOf="@+id/btn_yes"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
