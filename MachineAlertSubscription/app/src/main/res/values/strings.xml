@@ -10,4 +10,7 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_list_of_alerts">listOfAlerts</string>
     <string name="title_activity_alert_list">AlertList</string>
+    <string name="title_activity_confirm">ConfirmActivity</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 </resources>

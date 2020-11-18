@@ -2,10 +2,17 @@ package com.example.machinealertsubscription.BE
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity
-data class Alert(@PrimaryKey val ID: Int,val code: String, val errorDescription: String)
-
+data class Alarm(
+    @PrimaryKey
+    @SerializedName("alarmId")
+    val id: Int,
+    @SerializedName("code")
+    val code: String,
+    @SerializedName("description")
+    val errorDescription: String)
 
 @Entity
-data class Machine(@PrimaryKey val ID: Int)
+data class Machine(@PrimaryKey val machineId: String)
