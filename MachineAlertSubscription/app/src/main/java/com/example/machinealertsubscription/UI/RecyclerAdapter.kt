@@ -56,6 +56,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 putExtra("id", holder.txt_id.text)
                 putExtra("description", holder.txt_description.text)
                 putExtra("code", holder.txt_code.text)
+                putExtra("typeOfAlert", "Alarms")
             }
         }
         else{
@@ -63,6 +64,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 putExtra("id", holder.txt_description.text)
                 putExtra("description", "")
                 putExtra("code", "")
+                putExtra("typeOfAlert", "Machines")
             }
         }
 

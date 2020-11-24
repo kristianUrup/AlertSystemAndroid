@@ -1,6 +1,7 @@
 package com.example.machinealertsubscription.DataAccess
 
 import com.example.machinealertsubscription.BE.Alarm
+import com.example.machinealertsubscription.BE.Machine
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -43,5 +44,8 @@ class AlarmDAO  {
             Log.d("HTTP", "Call was successful");
         }*/
         return flowForAlarms
+    }
+    fun subscribeToAlarm(alarmId: Int, watchId: String) {
+        RetrofitInstance.api.subscribeToAlarm(alarmId, watchId);
     }
 }

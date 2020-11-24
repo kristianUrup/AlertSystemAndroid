@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import javax.crypto.Mac
 import com.example.machinealertsubscription.BE.Machine as Machine
 
 class MachineDAO {
@@ -21,5 +22,9 @@ class MachineDAO {
             }
         }
         return flowForMachines
+    }
+
+    fun subscribeToMachine(machineId: String, watchId: String) {
+        RetrofitInstance.api.subscribeToMachine(machineId, watchId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.machinealertsubscription.UI
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -23,7 +24,6 @@ class AlarmList : WearableActivity() {
     private var adapter: RecyclerAdapter<Any> = RecyclerAdapter(listOfItems, this)
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_list)
@@ -43,7 +43,6 @@ class AlarmList : WearableActivity() {
         var recyclerView: WearableRecyclerView = view_recyclerView
         println(listOfItems)
 
-
         if(identifier == "Alarms"){
             CoroutineScope(Main).launch {
                 alarmDao.getAlarms().collect { value ->
@@ -60,6 +59,7 @@ class AlarmList : WearableActivity() {
                 }
             }
         }
+
 
         recyclerView.apply {
             adapter = this@AlarmList.adapter
