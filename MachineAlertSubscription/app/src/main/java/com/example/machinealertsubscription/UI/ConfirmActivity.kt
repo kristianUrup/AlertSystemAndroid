@@ -7,6 +7,7 @@ import android.util.Log
 import com.example.machinealertsubscription.DataAccess.AlarmDAO
 import com.example.machinealertsubscription.DataAccess.MachineDAO
 import com.example.machinealertsubscription.R
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_confirm.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,11 +18,16 @@ class ConfirmActivity : WearableActivity() {
     private var alarmDao: AlarmDAO = AlarmDAO()
     private var machineDAO = MachineDAO()
     private var identifier: String = ""
+    private var tokenFromPreferences: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm)
         identifier = intent.getStringExtra("typeOfAlert")
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        tokenFromPreferences = sharedPreferences.getString("FCMToken","")!!
 
         // Enables Always-on
         setAmbientEnabled()
@@ -47,12 +53,12 @@ class ConfirmActivity : WearableActivity() {
         btn_ok.setOnClickListener {
             if(identifier == "Alarms") {
                 CoroutineScope(Dispatchers.Main).launch {
-                    alarmDao.subscribeToAlarm(1, "123123")
+                    alarmDao.subscribeToAlarm(intent.getStringExtra("id").toInt(), tokenFromPreferences)
                 }
                 finish()
             } else {
                 CoroutineScope(Dispatchers.Main).launch {
-                    machineDAO.subscribeToMachine("1", "123123")
+                    machineDAO.subscribeToMachine(intent.getStringExtra("id"), tokenFromPreferences)
                 }
                 finish()
 
