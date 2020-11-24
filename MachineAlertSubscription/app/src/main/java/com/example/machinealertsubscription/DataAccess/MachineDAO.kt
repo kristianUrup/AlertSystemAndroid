@@ -1,9 +1,11 @@
 package com.example.machinealertsubscription.DataAccess
 
+import com.example.machinealertsubscription.BE.MachineWatch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import javax.crypto.Mac
 import com.example.machinealertsubscription.BE.Machine as Machine
 
 class MachineDAO {
@@ -21,5 +23,12 @@ class MachineDAO {
             }
         }
         return flowForMachines
+    }
+
+    suspend fun subscribeToMachine(machineId: String, watchId: String) {
+        val mw = MachineWatch(machineId, watchId)
+        withContext(Dispatchers.IO) {
+            RetrofitInstance.api.subscribeToMachine(mw).execute();
+        }
     }
 }

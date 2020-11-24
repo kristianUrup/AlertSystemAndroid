@@ -15,4 +15,5 @@ object RetrofitInstance {
     val api: SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java)
     }
+
 }

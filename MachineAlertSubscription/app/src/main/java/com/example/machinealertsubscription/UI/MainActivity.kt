@@ -46,8 +46,8 @@ class MainActivity : WearableActivity() {
 
     btn_machines.setOnClickListener { view ->
       var intent = Intent(this, AlarmList::class.java).apply {
-        putExtra("typeOfAlert", "Machines")
-      }
+      putExtra("typeOfAlert", "Machines")
+    }
       startActivity(intent)
     }
   }
