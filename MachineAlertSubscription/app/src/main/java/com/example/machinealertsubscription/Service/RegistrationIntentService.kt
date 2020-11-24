@@ -20,7 +20,8 @@ class RegistrationIntentService: IntentService("RegIntentService") {
     private val notificationSettings = NotificationSettings()
 
     override fun onHandleIntent(intent: Intent?) {
-        FirebaseInstanceId.getInstance().instanceId
+
+         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
                 var fcmToken: String? = null
