@@ -28,8 +28,7 @@ class MachineDAO {
     suspend fun subscribeToMachine(machineId: String, watchId: String) {
         val mw = MachineWatch(machineId, watchId)
         withContext(Dispatchers.IO) {
-            var req = RetrofitInstance.api.subscribeToMachine(mw);
-            req.execute()
+            RetrofitInstance.api.subscribeToMachine(mw).execute();
         }
     }
 }

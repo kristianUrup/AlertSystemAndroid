@@ -49,8 +49,7 @@ class AlarmDAO  {
     suspend fun subscribeToAlarm(alarmId: Int, watchId: String) {
         val aw = AlarmWatch(alarmId, watchId)
         withContext(IO) {
-            var req = RetrofitInstance.api.subscribeToAlarm(aw)
-            req.execute()
+            RetrofitInstance.api.subscribeToAlarm(aw).execute()
         }
     }
 }
