@@ -1,14 +1,11 @@
 package com.example.machinealertsubscription.DataAccess
 
-
 import com.example.machinealertsubscription.BE.Alarm
-import retrofit2.http.GET
+import com.example.machinealertsubscription.BE.AlarmWatch
 import com.example.machinealertsubscription.BE.Machine
-import okhttp3.OkHttpClient
+import com.example.machinealertsubscription.BE.MachineWatch
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SimpleApi {
 
@@ -19,9 +16,8 @@ interface SimpleApi {
     fun getMachines(): Call<List<Machine>>
 
     @POST("subscribeToAlarm")
-    fun subscribeToAlarm(@Body alarmId: Int, watchId: String): Call<Void>
+    fun subscribeToAlarm(@Body alarmWatch: AlarmWatch): Call<Void>
 
-    @POST("subscribeToMachine/{machineId}/{watchId}")
-    fun subscribeToMachine(@Path("machineId") machineId: String, @Path("watchId") watchId: String): Call<Void>
-
+    @POST("subscribeToMachine")
+    fun subscribeToMachine(@Body machineWatch: MachineWatch): Call<Void>
 }
