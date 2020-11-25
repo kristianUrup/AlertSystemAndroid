@@ -101,7 +101,6 @@ class MainActivity : WearableActivity() {
   fun ToastNotify(notificationMessage: String?) {
     runOnUiThread {
       Toast.makeText(this@MainActivity, notificationMessage, Toast.LENGTH_LONG).show()
-      text_hello.text = notificationMessage
     }
   }
 

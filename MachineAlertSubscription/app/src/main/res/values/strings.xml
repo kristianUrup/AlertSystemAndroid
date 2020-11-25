@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MachineAlertSubscription</string>
     <string name="app_definition">Machines and Alerts</string>
-    <string name="button_alerts">Alerts</string>
+    <string name="button_alerts">Alarms</string>
     <string name="button_machines">Machines</string>
     <!--
     This string is used for square devices and overridden by hello_world in
