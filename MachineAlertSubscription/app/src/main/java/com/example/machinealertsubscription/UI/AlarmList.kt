@@ -2,15 +2,16 @@ package com.example.machinealertsubscription.UI
 
 //import com.example.machinealertsubscription.DataAccess.FakeDB
 import android.graphics.Color
-import android.graphics.Color.red
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.preference.PreferenceManager
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import com.example.machinealertsubscription.DataAccess.AlarmDAO
 import com.example.machinealertsubscription.DataAccess.MachineDAO
-import androidx.preference.PreferenceManager
 import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.activity_alert_list.*
 import kotlinx.coroutines.CoroutineScope
@@ -43,20 +44,23 @@ class AlarmList : WearableActivity() {
         var bundle: Bundle? = intent.extras
         val toIdentify = bundle!!.getString("typeOfAlert") as String
         identifier = intent.getStringExtra("typeOfAlert")
+    }
 
-
+    override fun onResume() {
+        super.onResume()
         setRecyclerView()
+        adapter.notifyDataSetChanged()
     }
 
     private fun setRecyclerView(){
         var recyclerView: WearableRecyclerView = view_recyclerView
-        println(listOfItems)
-
+        listOfItems.clear()
         if(identifier == "Alarms"){
             CoroutineScope(Main).launch {
                 alarmDao.getAlarms(tokenFromPreferences).collect { value ->
                     listOfItems.add(value)
                     adapter.notifyDataSetChanged()
+
                 }
             }
         }

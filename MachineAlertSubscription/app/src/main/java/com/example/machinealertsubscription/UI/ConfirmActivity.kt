@@ -20,6 +20,8 @@ class ConfirmActivity : WearableActivity() {
     private var isSubscribed = false
     private var identifier: String = ""
     private var tokenFromPreferences: String = ""
+    private var listOfItems: MutableList<Any> = mutableListOf()
+    private var adapter: RecyclerAdapter<Any> = RecyclerAdapter(listOfItems, this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,19 +67,19 @@ class ConfirmActivity : WearableActivity() {
                             intent.getStringExtra("id").toInt(),
                             tokenFromPreferences
                         )
+                        finish()
                     }
-                    finish()
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         machineDAO.DeleteMachineSubscription(
                             intent.getStringExtra("id"),
                             tokenFromPreferences
                         )
+                        finish()
                     }
-                    finish()
-
                 }
             }
+
         } else {
             btn_ok.setOnClickListener {
                 if (identifier == "Alarms") {
@@ -86,20 +88,18 @@ class ConfirmActivity : WearableActivity() {
                             intent.getStringExtra("id").toInt(),
                             tokenFromPreferences
                         )
+                        finish()
+
                     }
-                    finish()
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         machineDAO.subscribeToMachine(
                             intent.getStringExtra("id"),
-
                             tokenFromPreferences
                         )
+                        finish()
                     }
-                    finish()
-
                 }
-                Log.d("Subscribe", "Subscribed!")
             }
         }
     }

@@ -7,16 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ListView
 import android.widget.TextView
-import androidx.core.graphics.toColorInt
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.machinealertsubscription.BE.Alarm
 import com.example.machinealertsubscription.BE.Machine
 import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.list_item.view.*
-import org.w3c.dom.Text
+
 
 class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Context): RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
@@ -37,11 +35,9 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val currentItem = listOfItems[position]
-
         if(currentItem is Machine){
             if(currentItem.isSubscribed) {
-                holder.itemView.setBackgroundColor(Color.GREEN)
-
+                holder.txt_description.setTextColor(Color.GREEN)
             }
             holder.txt_description.text = currentItem.machineId
             holder.bool_isSubscribed = currentItem.isSubscribed
@@ -49,7 +45,9 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
         }
         else if(currentItem is Alarm){
             if(currentItem.isSubscribed) {
-                holder.itemView.setBackgroundColor(Color.GREEN)
+                holder.txt_id.setTextColor(Color.GREEN)
+                holder.txt_code.setTextColor(Color.GREEN)
+                holder.txt_description.setTextColor(Color.GREEN)
             }
             holder.txt_id.text = currentItem.id.toString()
             holder.txt_description.text = currentItem.errorDescription
@@ -65,6 +63,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
 
     fun setOnclickListeners(holder: RecycleViewHolder){
         val intent = Intent(ctx,ConfirmActivity::class.java)
+
         if(holder.txt_id.text != "" && holder.txt_code.text != "")
         {
             intent.apply {
@@ -84,9 +83,6 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 putExtra("isSubscribed", holder.bool_isSubscribed)
             }
         }
-
-
-
         holder.txt_id.setOnClickListener {
             ctx.startActivity(intent)
         }
@@ -96,7 +92,6 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
         holder.txt_code.setOnClickListener {
             ctx.startActivity(intent)
         }
+
     }
-
-
 }
