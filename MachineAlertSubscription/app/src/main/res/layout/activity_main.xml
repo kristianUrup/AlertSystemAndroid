@@ -18,7 +18,7 @@
         android:id="@+id/btn_alerts"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="111dp"
+        android:layout_height="105dp"
         android:layout_margin="0dp"
         android:layout_marginBottom="5dp"
         android:background="@color/dialog_shade_background"
@@ -26,6 +26,7 @@
         android:text="@string/button_alerts"
         app:layout_constraintBottom_toTopOf="@+id/btn_machines"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.view.Gravity
 import com.example.machinealertsubscription.DataAccess.AlarmDAO
 import com.example.machinealertsubscription.DataAccess.MachineDAO
 import com.example.machinealertsubscription.R
@@ -38,19 +39,21 @@ class ConfirmActivity : WearableActivity() {
 
         val descriptionFromBundle: String = intent.getStringExtra("description")
         val codeFromBundle: String = intent.getStringExtra("code")
-        if(codeFromBundle != null && descriptionFromBundle != null){
+        if(isSubscribed) {
+            txt_subscription_explanation.text = resources.getString(R.string.unsubscribeString)
+        } else {
+            txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
+        }
+        if(codeFromBundle != "" && descriptionFromBundle != ""){
             id.text = intent.getStringExtra("id")
             description.text = descriptionFromBundle
             code.text = codeFromBundle
-            if(isSubscribed) {
-                txt_subscription_explanation.text = resources.getString(R.string.unsubscribeString)
-            } else {
-                txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
-            }
-
         }
         else{
-            id.text = intent.getStringExtra("id")
+            code.text = intent.getStringExtra("id")
+            code.setTextSize(3,7f)
+            code.gravity = Gravity.CENTER
+
         }
 
     }
@@ -79,7 +82,6 @@ class ConfirmActivity : WearableActivity() {
                     }
                 }
             }
-
         } else {
             btn_ok.setOnClickListener {
                 if (identifier == "Alarms") {
@@ -89,7 +91,6 @@ class ConfirmActivity : WearableActivity() {
                             tokenFromPreferences
                         )
                         finish()
-
                     }
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {

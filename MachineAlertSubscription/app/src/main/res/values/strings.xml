@@ -13,7 +13,7 @@
     <string name="title_activity_confirm">ConfirmActivity</string>
     <string name="yes_button">Yes</string>
     <string name="no_button">No</string>
-    <string name="subscribeString">Do you really want to subscribe?</string>
-    <string name="unsubscribeString">Do you really want to unsubscribe?</string>
+    <string name="subscribeString">Do you want to subscribe?</string>
+    <string name="unsubscribeString">Do you want to unsubscribe?</string>
 
 </resources>
