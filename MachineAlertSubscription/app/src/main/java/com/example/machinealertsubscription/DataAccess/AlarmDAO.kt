@@ -12,10 +12,10 @@ class AlarmDAO  {
 
     constructor()
 
-    suspend fun getAlarms(): Flow<Alarm> {
+    suspend fun getAlarms(watchId: String): Flow<Alarm> {
         var response = listOf<Alarm>()
         withContext(IO) {
-            var alarms = RetrofitInstance.api.getAlarms()
+            var alarms = RetrofitInstance.api.getAlarms(watchId)
             response = alarms.execute().body()!!
         }
 
@@ -50,6 +50,13 @@ class AlarmDAO  {
         val aw = AlarmWatch(alarmId, watchId)
         withContext(IO) {
             RetrofitInstance.api.subscribeToAlarm(aw).execute()
+        }
+    }
+
+    suspend fun DeleteAlarmSubscription(alarmId: Int, watchId: String) {
+        val aw = AlarmWatch(alarmId, watchId)
+        withContext(IO) {
+            RetrofitInstance.api.deleteAlarmSubscription(aw).execute()
         }
     }
 }

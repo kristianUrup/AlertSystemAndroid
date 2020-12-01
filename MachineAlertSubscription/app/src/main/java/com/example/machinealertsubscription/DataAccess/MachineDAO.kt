@@ -9,10 +9,10 @@ import javax.crypto.Mac
 import com.example.machinealertsubscription.BE.Machine as Machine
 
 class MachineDAO {
-    suspend fun getMachines(): Flow<Machine> {
+    suspend fun getMachines(watchId: String): Flow<Machine> {
         var response = listOf<Machine>()
         withContext(Dispatchers.IO) {
-            var machines = RetrofitInstance.api.getMachines()
+            var machines = RetrofitInstance.api.getMachines(watchId)
             response = machines.execute().body()!!
         }
 
@@ -29,6 +29,13 @@ class MachineDAO {
         val mw = MachineWatch(machineId, watchId)
         withContext(Dispatchers.IO) {
             RetrofitInstance.api.subscribeToMachine(mw).execute();
+        }
+    }
+
+    suspend fun DeleteMachineSubscription(machineId: String, watchId: String) {
+        val mw = MachineWatch(machineId, watchId)
+        withContext(Dispatchers.IO) {
+            RetrofitInstance.api.deleteMachineSubscription(mw).execute();
         }
     }
 }

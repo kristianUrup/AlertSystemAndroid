@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.http.GET
 import java.io.Console
 import kotlin.random.Random
-
+/*
 class FakeDB{
 
     private var machineId = 0
@@ -96,3 +96,4 @@ class FakeDB{
         return alertId
     }
 }
+*/

@@ -2,15 +2,19 @@ package com.example.machinealertsubscription.UI
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.machinealertsubscription.BE.Alarm
 import com.example.machinealertsubscription.BE.Machine
 import com.example.machinealertsubscription.R
 import kotlinx.android.synthetic.main.list_item.view.*
+
 
 class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Context): RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
@@ -18,11 +22,11 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
         val txt_id: TextView = itemView.txt_id
         val txt_description: TextView = itemView.txt_description
         val txt_code: TextView = itemView.txt_code
+        var bool_isSubscribed: Boolean = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-
         return RecycleViewHolder(itemView)
     }
 
@@ -31,15 +35,24 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val currentItem = listOfItems[position]
-
         if(currentItem is Machine){
+            if(currentItem.isSubscribed) {
+                holder.txt_description.setTextColor(Color.GREEN)
+            }
             holder.txt_description.text = currentItem.machineId
+            holder.bool_isSubscribed = currentItem.isSubscribed
             setOnclickListeners(holder)
         }
         else if(currentItem is Alarm){
+            if(currentItem.isSubscribed) {
+                holder.txt_id.setTextColor(Color.GREEN)
+                holder.txt_code.setTextColor(Color.GREEN)
+                holder.txt_description.setTextColor(Color.GREEN)
+            }
             holder.txt_id.text = currentItem.id.toString()
             holder.txt_description.text = currentItem.errorDescription
             holder.txt_code.text = currentItem.code
+            holder.bool_isSubscribed = currentItem.isSubscribed
             setOnclickListeners(holder)
         }
         else {
@@ -50,6 +63,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
 
     fun setOnclickListeners(holder: RecycleViewHolder){
         val intent = Intent(ctx,ConfirmActivity::class.java)
+
         if(holder.txt_id.text != "" && holder.txt_code.text != "")
         {
             intent.apply {
@@ -57,6 +71,7 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 putExtra("description", holder.txt_description.text)
                 putExtra("code", holder.txt_code.text)
                 putExtra("typeOfAlert", "Alarms")
+                putExtra("isSubscribed", holder.bool_isSubscribed)
             }
         }
         else{
@@ -65,11 +80,9 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 putExtra("description", "")
                 putExtra("code", "")
                 putExtra("typeOfAlert", "Machines")
+                putExtra("isSubscribed", holder.bool_isSubscribed)
             }
         }
-
-
-
         holder.txt_id.setOnClickListener {
             ctx.startActivity(intent)
         }
@@ -79,7 +92,6 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
         holder.txt_code.setOnClickListener {
             ctx.startActivity(intent)
         }
+
     }
-
-
 }

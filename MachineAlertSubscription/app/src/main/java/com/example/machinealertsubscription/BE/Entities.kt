@@ -12,10 +12,15 @@ data class Alarm(
     @SerializedName("code")
     val code: String,
     @SerializedName("description")
-    val errorDescription: String)
+    val errorDescription: String,
+    val isSubscribed: Boolean
+)
 
 @Entity
-data class Machine(@PrimaryKey val machineId: String)
+data class Machine(
+    @PrimaryKey val machineId: String,
+    val isSubscribed: Boolean
+)
 
 @Entity
 data class MachineWatch(
