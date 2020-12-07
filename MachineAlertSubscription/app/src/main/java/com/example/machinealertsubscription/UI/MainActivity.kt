@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.machinealertsubscription.R
 import com.example.machinealertsubscription.Service.FirebaseService
@@ -25,8 +26,6 @@ class MainActivity : WearableActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
-
 
     mainActivity = this
     isAcitivityVisible = true

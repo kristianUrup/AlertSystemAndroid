@@ -8,11 +8,10 @@
     android:layout_marginBottom="4dp">
 
     <TextView
-        android:id="@+id/txt_id"
-        android:layout_width="20dp"
+        android:id="@+id/txt_code"
+        android:layout_width="10dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginEnd="0dp"
+        android:layout_weight="1"
         android:clickable="true"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -28,12 +27,4 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txt_code"
-        android:layout_width="10dp"
-        android:layout_height="40dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:textSize="16sp"
-        android:textStyle="bold" />
 </LinearLayout>

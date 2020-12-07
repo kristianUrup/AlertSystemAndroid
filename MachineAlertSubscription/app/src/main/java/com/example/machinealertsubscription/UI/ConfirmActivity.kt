@@ -24,7 +24,6 @@ class ConfirmActivity : WearableActivity() {
     private var listOfItems: MutableList<Any> = mutableListOf()
     private var adapter: RecyclerAdapter<Any> = RecyclerAdapter(listOfItems, this)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm)
@@ -36,7 +35,6 @@ class ConfirmActivity : WearableActivity() {
         // Enables Always-on
         setAmbientEnabled()
         setOnclickListeners()
-
         val descriptionFromBundle: String = intent.getStringExtra("description")
         val codeFromBundle: String = intent.getStringExtra("code")
         if(isSubscribed) {
@@ -45,9 +43,12 @@ class ConfirmActivity : WearableActivity() {
             txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
         }
         if(codeFromBundle != "" && descriptionFromBundle != ""){
-            id.text = intent.getStringExtra("id")
-            description.text = descriptionFromBundle
             code.text = codeFromBundle
+            code.setTextSize(3,10f)
+            code.gravity = Gravity.CENTER
+            description.text = descriptionFromBundle
+            description.gravity = Gravity.CENTER
+
         }
         else{
             code.text = intent.getStringExtra("id")
@@ -55,7 +56,6 @@ class ConfirmActivity : WearableActivity() {
             code.gravity = Gravity.CENTER
 
         }
-
     }
 
     private fun setOnclickListeners() {

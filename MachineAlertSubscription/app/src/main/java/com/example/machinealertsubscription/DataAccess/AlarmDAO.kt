@@ -1,22 +1,32 @@
 package com.example.machinealertsubscription.DataAccess
 
+import android.content.Intent
 import com.example.machinealertsubscription.BE.Alarm
 import com.example.machinealertsubscription.BE.AlarmWatch
+import com.example.machinealertsubscription.UI.AlarmList
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 
-class AlarmDAO  {
-
-    constructor()
+class AlarmDAO() {
 
     suspend fun getAlarms(watchId: String): Flow<Alarm> {
         var response = listOf<Alarm>()
         withContext(IO) {
-            var alarms = RetrofitInstance.api.getAlarms(watchId)
-            response = alarms.execute().body()!!
+            try {
+                var alarms = RetrofitInstance.api.getAlarms(watchId)
+                try {
+                    response = alarms.execute().body()!!
+                } catch (e: KotlinNullPointerException) {
+                    println("Caught KotlinNullPointerException")
+                }
+            } catch (e: SocketTimeoutException) {
+                println("Caught SocketTimeoutException")
+            }
         }
 
         var flowForAlarms = flow {

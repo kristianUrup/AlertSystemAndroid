@@ -15,5 +15,7 @@
     <string name="no_button">No</string>
     <string name="subscribeString">Do you want to subscribe?</string>
     <string name="unsubscribeString">Do you want to unsubscribe?</string>
+    <string name="error">Error!</string>
+    <string name="try_again_later_or_contact_an_administrator">Try again later or contact an administrator</string>
 
 </resources>
