@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/try_again_later_or_contact_an_administrator"
+        android:text="@string/list_loading_error_message"
         android:textSize="14sp"
         android:visibility="invisible" />
 

@@ -14,6 +14,37 @@
         android:layout_height="match_parent"
         android:padding="@dimen/inner_frame_layout_padding">
 
+        <LinearLayout
+            android:layout_width="206dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description">
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="104dp"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:text="@string/yes_button"
+                android:textSize="18sp"
+                android:textColor="@color/light_grey"
+                android:background="@drawable/piebutton"/>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:fallbackLineSpacing="false"
+                android:hapticFeedbackEnabled="false"
+                android:text="@string/no_button"
+                android:textSize="18sp"
+                android:textColor="@color/light_grey"
+                android:background="@drawable/piebutton"/>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/txt_subscription_explanation"
             android:layout_width="wrap_content"
@@ -46,28 +77,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_subscription_explanation" />
-
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="52dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/yes_button"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="52dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/no_button"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/btn_ok"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.wear.widget.BoxInsetLayout>
