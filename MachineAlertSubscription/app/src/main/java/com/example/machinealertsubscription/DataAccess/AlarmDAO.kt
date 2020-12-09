@@ -8,14 +8,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 
-class AlarmDAO  {
-
-    constructor()
+class AlarmDAO {
 
     suspend fun getAlarms(watchId: String): Flow<Alarm> {
         var response = listOf<Alarm>()
         withContext(IO) {
-            var alarms = RetrofitInstance.api.getAlarms(watchId)
+            val alarms = RetrofitInstance.api.getAlarms(watchId)
             response = alarms.execute().body()!!
         }
 
@@ -24,8 +22,9 @@ class AlarmDAO  {
             {
                 emit(i)
             }
-        }
 
+        }
+        return flowForAlarms
 
 
 
@@ -44,7 +43,7 @@ class AlarmDAO  {
             alarms = response.body() as List<Alarm>
             Log.d("HTTP", "Call was successful");
         }*/
-        return flowForAlarms
+
     }
     suspend fun subscribeToAlarm(alarmId: Int, watchId: String) {
         val aw = AlarmWatch(alarmId, watchId)

@@ -1,9 +1,11 @@
 package com.example.machinealertsubscription.UI
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.machinealertsubscription.R
 import com.example.machinealertsubscription.Service.FirebaseService

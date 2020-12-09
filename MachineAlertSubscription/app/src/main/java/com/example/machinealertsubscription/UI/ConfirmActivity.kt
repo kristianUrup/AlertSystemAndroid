@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.util.Log
+import android.view.Gravity
 import com.example.machinealertsubscription.DataAccess.AlarmDAO
 import com.example.machinealertsubscription.DataAccess.MachineDAO
 import com.example.machinealertsubscription.R
@@ -23,7 +24,6 @@ class ConfirmActivity : WearableActivity() {
     private var listOfItems: MutableList<Any> = mutableListOf()
     private var adapter: RecyclerAdapter<Any> = RecyclerAdapter(listOfItems, this)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm)
@@ -35,24 +35,24 @@ class ConfirmActivity : WearableActivity() {
         // Enables Always-on
         setAmbientEnabled()
         setOnclickListeners()
-
         val descriptionFromBundle: String = intent.getStringExtra("description")
         val codeFromBundle: String = intent.getStringExtra("code")
-        if(codeFromBundle != null && descriptionFromBundle != null){
-            id.text = intent.getStringExtra("id")
-            description.text = descriptionFromBundle
+        if(isSubscribed) {
+            txt_subscription_explanation.text = resources.getString(R.string.unsubscribeString)
+        } else {
+            txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
+        }
+        if(codeFromBundle != "" && descriptionFromBundle != ""){
             code.text = codeFromBundle
-            if(isSubscribed) {
-                txt_subscription_explanation.text = resources.getString(R.string.unsubscribeString)
-            } else {
-                txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
-            }
+            code.setTextSize(3,10f)
+            description.text = descriptionFromBundle
 
         }
         else{
-            id.text = intent.getStringExtra("id")
-        }
+            code.text = intent.getStringExtra("id")
+            code.setTextSize(3,7f)
 
+        }
     }
 
     private fun setOnclickListeners() {
@@ -79,7 +79,6 @@ class ConfirmActivity : WearableActivity() {
                     }
                 }
             }
-
         } else {
             btn_ok.setOnClickListener {
                 if (identifier == "Alarms") {
@@ -89,7 +88,6 @@ class ConfirmActivity : WearableActivity() {
                             tokenFromPreferences
                         )
                         finish()
-
                     }
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
