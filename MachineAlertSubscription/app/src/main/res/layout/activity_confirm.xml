@@ -66,6 +66,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/code" />
@@ -77,6 +78,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_subscription_explanation" />

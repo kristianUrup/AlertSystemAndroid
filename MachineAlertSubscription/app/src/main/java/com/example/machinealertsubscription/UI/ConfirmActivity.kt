@@ -45,15 +45,12 @@ class ConfirmActivity : WearableActivity() {
         if(codeFromBundle != "" && descriptionFromBundle != ""){
             code.text = codeFromBundle
             code.setTextSize(3,10f)
-            code.gravity = Gravity.CENTER
             description.text = descriptionFromBundle
-            description.gravity = Gravity.CENTER
 
         }
         else{
             code.text = intent.getStringExtra("id")
             code.setTextSize(3,7f)
-            code.gravity = Gravity.CENTER
 
         }
     }
