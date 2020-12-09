@@ -1,15 +1,11 @@
 package com.example.machinealertsubscription.DataAccess
 
-import android.system.ErrnoException
 import com.example.machinealertsubscription.BE.Alarm
 import com.example.machinealertsubscription.BE.AlarmWatch
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
-import java.net.ConnectException
-import java.net.SocketTimeoutException
 
 
 class AlarmDAO {
@@ -26,8 +22,9 @@ class AlarmDAO {
             {
                 emit(i)
             }
-        }
 
+        }
+        return flowForAlarms
 
 
 
@@ -46,7 +43,7 @@ class AlarmDAO {
             alarms = response.body() as List<Alarm>
             Log.d("HTTP", "Call was successful");
         }*/
-        return flowForAlarms
+
     }
     suspend fun subscribeToAlarm(alarmId: Int, watchId: String) {
         val aw = AlarmWatch(alarmId, watchId)

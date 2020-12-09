@@ -16,32 +16,35 @@
 
         <LinearLayout
             android:layout_width="206dp"
-            android:layout_height="84dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="7dp"
             android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description">
+            app:layout_constraintTop_toBottomOf="@+id/code">
 
             <Button
                 android:id="@+id/btn_ok"
-                android:layout_width="104dp"
+                android:layout_width="105dp"
                 android:layout_height="match_parent"
-                android:fadeScrollbars="false"
+                android:background="@drawable/piebutton"
+                android:paddingLeft="25dp"
+                android:paddingBottom="15dp"
                 android:text="@string/yes_button"
-                android:textSize="18sp"
                 android:textColor="@color/light_grey"
-                android:background="@drawable/piebutton"/>
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_cancel"
-                android:layout_width="100dp"
+                android:layout_width="105dp"
                 android:layout_height="match_parent"
-                android:fallbackLineSpacing="false"
-                android:hapticFeedbackEnabled="false"
+                android:background="@drawable/piebutton"
+                android:paddingRight="25dp"
+                android:paddingBottom="15dp"
                 android:text="@string/no_button"
-                android:textSize="18sp"
                 android:textColor="@color/light_grey"
-                android:background="@drawable/piebutton"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 

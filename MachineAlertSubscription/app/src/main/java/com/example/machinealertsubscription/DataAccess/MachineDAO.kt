@@ -13,19 +13,8 @@ class MachineDAO {
     suspend fun getMachines(watchId: String): Flow<Machine> {
         var response = listOf<Machine>()
         withContext(Dispatchers.IO) {
-            try {
                 var machines = RetrofitInstance.api.getMachines(watchId)
-                try {
                     response = machines.execute().body()!!
-                } catch (e: KotlinNullPointerException) {
-                }
-            } catch (e: SocketTimeoutException) {
-                println("caught SocketTimeoutException")
-            }
-
-
-
-
         }
 
         var flowForMachines = flow {
