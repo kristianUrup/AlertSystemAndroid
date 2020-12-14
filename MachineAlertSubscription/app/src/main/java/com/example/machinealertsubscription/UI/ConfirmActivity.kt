@@ -27,7 +27,7 @@ class ConfirmActivity : WearableActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm)
-        identifier = intent.getStringExtra("typeOfAlert")
+        identifier = intent.getStringExtra("typeOfAlert")!!
         isSubscribed = intent.getBooleanExtra("isSubscribed", false)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         tokenFromPreferences = sharedPreferences.getString("FCMToken","")!!
@@ -35,24 +35,19 @@ class ConfirmActivity : WearableActivity() {
         // Enables Always-on
         setAmbientEnabled()
         setOnclickListeners()
-        val descriptionFromBundle: String = intent.getStringExtra("description")
-        val codeFromBundle: String = intent.getStringExtra("code")
+
+        val descriptionFromBundle: String = intent.getStringExtra("description")!!
+        val codeFromBundle: String = intent.getStringExtra("code")!!
         if(isSubscribed) {
             txt_subscription_explanation.text = resources.getString(R.string.unsubscribeString)
         } else {
             txt_subscription_explanation.text = resources.getString(R.string.subscribeString)
         }
-        if(codeFromBundle != "" && descriptionFromBundle != ""){
-            code.text = codeFromBundle
-            code.setTextSize(3,10f)
-            description.text = descriptionFromBundle
 
-        }
-        else{
-            code.text = intent.getStringExtra("id")
-            code.setTextSize(3,7f)
-
-        }
+        // Sets the view
+        code.text = codeFromBundle
+        code.setTextSize(3,10f)
+        description.text = descriptionFromBundle
     }
 
     private fun setOnclickListeners() {
@@ -64,7 +59,7 @@ class ConfirmActivity : WearableActivity() {
                 if (identifier == "Alarms") {
                     CoroutineScope(Dispatchers.Main).launch {
                         alarmDao.DeleteAlarmSubscription(
-                            intent.getStringExtra("id").toInt(),
+                            intent.getStringExtra("id")!!.toInt(),
                             tokenFromPreferences
                         )
                         finish()
@@ -72,7 +67,7 @@ class ConfirmActivity : WearableActivity() {
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         machineDAO.DeleteMachineSubscription(
-                            intent.getStringExtra("id"),
+                            intent.getStringExtra("id")!!,
                             tokenFromPreferences
                         )
                         finish()
@@ -84,7 +79,7 @@ class ConfirmActivity : WearableActivity() {
                 if (identifier == "Alarms") {
                     CoroutineScope(Dispatchers.Main).launch {
                         alarmDao.subscribeToAlarm(
-                            intent.getStringExtra("id").toInt(),
+                            intent.getStringExtra("id")!!.toInt(),
                             tokenFromPreferences
                         )
                         finish()
@@ -92,7 +87,7 @@ class ConfirmActivity : WearableActivity() {
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         machineDAO.subscribeToMachine(
-                            intent.getStringExtra("id"),
+                            intent.getStringExtra("id")!!,
                             tokenFromPreferences
                         )
                         finish()
