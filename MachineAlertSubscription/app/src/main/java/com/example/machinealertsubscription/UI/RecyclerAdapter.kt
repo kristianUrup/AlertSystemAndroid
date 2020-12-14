@@ -22,7 +22,6 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
     class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txt_description: TextView = itemView.txt_description
         val txt_code: TextView = itemView.txt_code
-        var bool_isSubscribed: Boolean = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
@@ -32,16 +31,16 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
 
     override fun getItemCount() = listOfItems.size
 
-
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val currentItem = listOfItems[position]
         if(currentItem is Machine){
             if(currentItem.isSubscribed) {
+                holder.txt_code.setTextColor(Color.GREEN)
                 holder.txt_description.setTextColor(Color.GREEN)
             }
-            holder.txt_description.text = currentItem.machineId
-            holder.bool_isSubscribed = currentItem.isSubscribed
-            setOnclickListeners(holder, currentItem.machineId, "")
+            holder.txt_code.text = currentItem.name
+            holder.txt_description.text = currentItem.type
+            setOnclickListeners(holder, currentItem.machineId, currentItem.isSubscribed, currentItem.type, currentItem.name, "Machines")
         }
         else if(currentItem is Alarm){
             if(currentItem.isSubscribed) {
@@ -57,36 +56,24 @@ class RecyclerAdapter<T>(private val listOfItems: List<T>, private val ctx: Cont
                 holder.txt_description.text = currentItem.errorDescription
             }
             holder.txt_code.text = currentItem.code
-            holder.bool_isSubscribed = currentItem.isSubscribed
-            setOnclickListeners(holder, currentItem.id.toString(), currentItem.errorDescription)
+            setOnclickListeners(holder, currentItem.id.toString(), currentItem.isSubscribed, currentItem.errorDescription, currentItem.code, "Alarms")
 
         }
         else {
-            //Do nothing
+            Log.d("TAG", "CurrentItem was neither Alarm or Machine.")
         }
     }
-    fun setOnclickListeners(holder: RecycleViewHolder, id: String, errorDescription: String){
+    private fun setOnclickListeners(holder: RecycleViewHolder, id: String, isSubscribed: Boolean, description: String, code: String, typeOfAlert: String){
         val intent = Intent(ctx,ConfirmActivity::class.java)
 
-        if(holder.txt_code.text != "")
-        {
-            intent.apply {
-                putExtra("id", id)
-                putExtra("description", errorDescription)
-                putExtra("code", holder.txt_code.text)
-                putExtra("typeOfAlert", "Alarms")
-                putExtra("isSubscribed", holder.bool_isSubscribed)
-            }
+        intent.apply {
+            putExtra("id", id)
+            putExtra("description", description)
+            putExtra("code", code)
+            putExtra("typeOfAlert", typeOfAlert)
+            putExtra("isSubscribed", isSubscribed)
         }
-        else{
-            intent.apply {
-                putExtra("id", holder.txt_description.text)
-                putExtra("description", "")
-                putExtra("code", "")
-                putExtra("typeOfAlert", "Machines")
-                putExtra("isSubscribed", holder.bool_isSubscribed)
-            }
-        }
+
         holder.txt_description.setOnClickListener {
             ctx.startActivity(intent)
         }

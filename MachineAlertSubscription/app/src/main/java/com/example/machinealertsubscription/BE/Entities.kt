@@ -19,6 +19,8 @@ data class Alarm(
 @Entity
 data class Machine(
     @PrimaryKey val machineId: String,
+    val name: String,
+    val type: String,
     val isSubscribed: Boolean
 )
 
