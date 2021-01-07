@@ -32,27 +32,26 @@ class RegistrationIntentService: IntentService("RegIntentService") {
                     resultString = "Did not get token"
                 }
                 if (fcmToken != null) {
-                val tokenFromPreferences = sharedPreferences.getString("FCMToken","")
-                if(tokenFromPreferences != fcmToken){
-                    try {
-                        val hub = NotificationHub(
-                            "mobile-app-notification",
-                            "Endpoint=sb://alarm-system-notification.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=RLHwGy5sFgmpEt1uF3HzhsCc6YQbinr8UK5MKwxh4f4=",
-                            applicationContext
-                        )
-                        CoroutineScope(IO).launch {
-                            hub.register(fcmToken)
-                            sharedPreferences.edit().putString("FCMToken", fcmToken).apply()
+                    val tokenFromPreferences = sharedPreferences.getString("FCMToken","")
+                        if(tokenFromPreferences != fcmToken){
+                            try {
+                                val hub = NotificationHub(
+                                    notificationSettings.HubName,
+                                    notificationSettings.HubListenConnectionString,
+                                    applicationContext
+                                )
+                                CoroutineScope(IO).launch {
+                                    hub.register(fcmToken)
+                                    sharedPreferences.edit().putString("FCMToken", fcmToken).apply()
+                                }
+                            } catch (e: java.lang.Exception) {
+                                e.printStackTrace()
+                                resultString = "error occurred"
+                            }
+                        } else {
+                            resultString = "Already registered haha"
                         }
-                    } catch (e: java.lang.Exception) {
-                        e.printStackTrace()
-                        resultString = "error occurred"
-                    }
-                } else {
-                    resultString = "Already registered haha"
                 }
-
-            }
                 Log.d(TAG, resultString)
                 if (MainActivity().isAcitivityVisible) {
                     MainActivity().mainActivity.ToastNotify(resultString)
