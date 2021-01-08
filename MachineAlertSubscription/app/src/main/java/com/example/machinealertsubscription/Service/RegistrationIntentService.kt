@@ -20,6 +20,7 @@ class RegistrationIntentService: IntentService("RegIntentService") {
     private val notificationSettings = NotificationSettings()
 
     override fun onHandleIntent(intent: Intent?) {
+        println(FirebaseInstanceId.getInstance().instanceId)
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -49,7 +50,7 @@ class RegistrationIntentService: IntentService("RegIntentService") {
                                 resultString = "error occurred"
                             }
                         } else {
-                            resultString = "Already registered haha"
+                            resultString = "Already registered"
                         }
                 }
                 Log.d(TAG, resultString)
