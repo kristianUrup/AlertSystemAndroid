@@ -20,6 +20,7 @@ class MachineDAO {
         var flowForMachines = flow {
 
             for (machine in response) {
+                println(machine)
                 emit(machine)
             }
         }

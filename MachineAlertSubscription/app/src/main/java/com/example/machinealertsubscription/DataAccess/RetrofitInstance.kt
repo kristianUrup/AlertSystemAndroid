@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
      val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.43.62:7071/api/")
+            .baseUrl("https://alarm-system-functions.azurewebsites.net/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -14,5 +14,4 @@ object RetrofitInstance {
     val api: SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java)
     }
-
 }
